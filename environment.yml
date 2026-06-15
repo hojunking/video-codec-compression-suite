@@ -1,0 +1,11 @@
+name: vccs
+channels:
+  - conda-forge
+dependencies:
+  - python>=3.9
+  - ffmpeg
+  - pyyaml
+  - pip
+  - pip:
+      - -e .
+

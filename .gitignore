@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+outputs/
+*.yuv
+*.bin
+*.264
+*.265
+*.266
+*.mp4
+*.mkv
+*.webm
+

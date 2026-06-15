@@ -1,0 +1,35 @@
+codec: vp9_ffmpeg
+family: vp9
+runner: ffmpeg
+encoder: libvpx-vp9
+
+quality:
+  requested_qp: 37
+  quality_param_kind: crf
+  qp_mapping: linear_h26x_qp_to_vp9_crf
+  mapping:
+    requested_qp_min: 20
+    requested_qp_max: 51
+    effective_crf_min: 15
+    effective_crf_max: 55
+
+prediction:
+  gop_size: 32
+  # VP9 does not use H.26x-style B-frames.
+  b_frames: 0
+  closed_gop: true
+  scenecut: false
+
+ffmpeg:
+  row_mt: true
+  tile_columns: 2
+  quality: good
+  cpu_used: 2
+  extra_args: []
+
+logs:
+  keep_native_stdout: true
+  keep_native_stderr: true
+  normalize_to_hevc_csv: true
+  dummy_missing_fields: true
+

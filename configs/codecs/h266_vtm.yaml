@@ -1,0 +1,23 @@
+codec: h266_vtm
+family: h266
+runner: vtm
+encoder: EncoderAppStatic
+
+quality:
+  requested_qp: 37
+  quality_param_kind: qp
+  qp_mapping: identity
+
+vtm:
+  encoder_path: null
+  cfg_path: null
+  input_bit_depth: 8
+  input_chroma_format: 420
+  extra_args: []
+
+logs:
+  keep_native_stdout: true
+  keep_native_stderr: true
+  normalize_to_hevc_csv: true
+  dummy_missing_fields: true
+

@@ -1,0 +1,31 @@
+codec: av1_ffmpeg
+family: av1
+runner: ffmpeg
+encoder: libsvtav1
+
+quality:
+  requested_qp: 37
+  quality_param_kind: q
+  qp_mapping: linear_h26x_qp_to_av1_q
+  mapping:
+    requested_qp_min: 20
+    requested_qp_max: 51
+    effective_q_min: 15
+    effective_q_max: 55
+
+prediction:
+  gop_size: 32
+  b_frames: 3
+  closed_gop: true
+  scenecut: false
+
+ffmpeg:
+  preset: 6
+  extra_args: []
+
+logs:
+  keep_native_stdout: true
+  keep_native_stderr: true
+  normalize_to_hevc_csv: true
+  dummy_missing_fields: true
+

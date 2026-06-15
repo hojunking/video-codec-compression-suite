@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "video-codec-compression-suite"
+version = "0.1.0"
+description = "Configurable video compression pipeline with codec-specific native logs and HEVC-style normalized CSV exports."
+requires-python = ">=3.9"
+dependencies = [
+  "pyyaml>=6.0",
+]
+
+[project.scripts]
+vccs = "vccs.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+

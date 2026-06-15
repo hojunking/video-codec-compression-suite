@@ -1,0 +1,27 @@
+codec: h265_hm
+family: h265
+runner: hm
+encoder: TAppEncoderStatic
+
+quality:
+  requested_qp: 37
+  quality_param_kind: qp
+  qp_mapping: identity
+
+hm:
+  encoder_path: null
+  cfg_path: null
+  profile: main
+  input_bit_depth: 8
+  internal_bit_depth: 8
+  input_chroma_format: 420
+  conformance_window_mode: 1
+  intra_qp_offset: null
+  extra_args: []
+
+logs:
+  keep_native_stdout: true
+  keep_native_stderr: true
+  normalize_to_hevc_csv: true
+  dummy_missing_fields: true
+

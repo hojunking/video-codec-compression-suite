@@ -1,0 +1,34 @@
+run:
+  output_root: outputs/free_grass_yuv
+  overwrite: false
+
+input:
+  type: image_sequence
+  path: "/media/knuvi/Extreme SSD/jung/3dgs-dataset/origin_dataset/free_dataset/free_dataset/grass/images"
+  fps: 60
+  frames: null
+  start_time: null
+  duration: null
+
+yuv:
+  pixel_format: yuv420p
+  bit_depth: 8
+  chroma_format: 420
+  keep_file: true
+  filename: input.yuv
+
+geometry:
+  even_dimensions: crop
+  crop: null
+  resize: null
+
+frame_export:
+  enabled: false
+  format: jpg
+  quality: 2
+  preserve_source_names: true
+
+tools:
+  ffmpeg: ffmpeg
+  ffprobe: ffprobe
+

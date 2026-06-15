@@ -1,0 +1,26 @@
+codec: h264_ffmpeg
+family: h264
+runner: ffmpeg
+encoder: libx264
+
+quality:
+  requested_qp: 37
+  quality_param_kind: qp
+  qp_mapping: identity
+
+prediction:
+  gop_size: 32
+  b_frames: 3
+  closed_gop: true
+  scenecut: false
+
+ffmpeg:
+  preset: medium
+  tune: null
+  extra_args: []
+
+logs:
+  keep_native_stdout: true
+  keep_native_stderr: true
+  normalize_to_hevc_csv: true
+

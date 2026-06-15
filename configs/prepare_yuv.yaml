@@ -1,0 +1,36 @@
+run:
+  output_root: outputs
+  overwrite: false
+
+input:
+  # type can be: video, image_sequence, yuv
+  type: video
+  path: null
+  fps: null
+  frames: null
+  start_time: null
+  duration: null
+
+yuv:
+  pixel_format: yuv420p
+  bit_depth: 8
+  chroma_format: 420
+  keep_file: true
+  filename: input.yuv
+
+geometry:
+  # even_dimensions can be: crop, pad, error
+  even_dimensions: crop
+  crop: null
+  resize: null
+
+frame_export:
+  enabled: false
+  format: jpg
+  quality: 2
+  preserve_source_names: true
+
+tools:
+  ffmpeg: ffmpeg
+  ffprobe: ffprobe
+
