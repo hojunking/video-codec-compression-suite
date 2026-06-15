@@ -1,5 +1,7 @@
 # Video Codec Compression Suite
 
+![VCCS overview](asset/VCCS.png)
+
 Configurable video compression tool for running one input through multiple
 codecs, QP settings, and log exporters.
 
