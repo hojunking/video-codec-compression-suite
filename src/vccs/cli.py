@@ -42,7 +42,54 @@ def build_parser() -> argparse.ArgumentParser:
         help="Write HM/x265-style normalized CSV logs. Overrides codec YAML when set.",
     )
 
+    check_ref = sub.add_parser("check-reference", help="Check JM/HM/VTM executable paths in a codec YAML.")
+    check_ref.add_argument("--codec-config", required=True, help="Reference codec YAML config.")
+
     return parser
+
+
+def _check_path(path_value: str | None, label: str) -> bool:
+    if not path_value:
+        print(f"  MISSING {label}: not set")
+        return False
+    path = Path(path_value)
+    if path.exists():
+        print(f"  OK      {label}: {path}")
+        return True
+    print(f"  MISSING {label}: {path}")
+    return False
+
+
+def check_reference_config(config_path: Path) -> int:
+    cfg = load_yaml(config_path)
+    codec = cfg.get("codec")
+    runner = cfg.get("runner")
+    print(f"reference config: {config_path}")
+    print(f"codec           : {codec}")
+    print(f"runner          : {runner}")
+
+    ok = True
+    if runner == "jm":
+        jm = cfg.get("jm", {})
+        ok &= _check_path(jm.get("encoder_path"), "jm.encoder_path")
+        ok &= _check_path(jm.get("workdir"), "jm.workdir")
+    elif runner == "hm":
+        hm = cfg.get("hm", {})
+        ok &= _check_path(hm.get("encoder_path"), "hm.encoder_path")
+        ok &= _check_path(hm.get("cfg_path"), "hm.cfg_path")
+    elif runner == "vtm":
+        vtm = cfg.get("vtm", {})
+        ok &= _check_path(vtm.get("encoder_path"), "vtm.encoder_path")
+        ok &= _check_path(vtm.get("cfg_path"), "vtm.cfg_path")
+    else:
+        print("  This is not a JM/HM/VTM reference backend config.")
+        return 2
+
+    if ok:
+        print("status          : ready")
+        return 0
+    print("status          : edit the YAML paths above before running this backend")
+    return 1
 
 
 def main() -> int:
@@ -57,6 +104,9 @@ def main() -> int:
         print(f"prepared YUV: {metadata['yuv']['path']}")
         print(f"metadata    : {Path(args.output) / 'metadata.json'}")
         return 0
+
+    if args.command == "check-reference":
+        return check_reference_config(Path(args.codec_config))
 
     if args.command == "compress":
         result = compress_one(

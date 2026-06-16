@@ -40,36 +40,29 @@ pip install -e .
 
 FFmpeg and FFprobe are installed through the provided conda environment.
 
-Reference software backends require external binaries:
+Some backends use external reference encoders:
 
 - JM for `h264_jm`
 - HM for `h265_hm`
 - VTM for `h266_vtm`
 
-Build only the reference software you need, then set its executable and config
-paths in the matching YAML file under `configs/codecs/`.
+Use these only if you specifically need the reference encoder. Otherwise, the
+FFmpeg backends are enough for H.264/H.265/AV1/VP9.
 
-Reference software sources:
+To use a reference backend:
 
-- JM / H.264: https://iphome.hhi.de/suehring/tml/download/
-- HM / H.265: https://vcgit.hhi.fraunhofer.de/jct-vc/HM
-- VTM / H.266: https://vcgit.hhi.fraunhofer.de/jvet/VVCSoftware_VTM
+1. Download and build the reference software.
+2. Put the built encoder path in the matching YAML file.
+3. Check that the paths are valid.
 
-Typical build flow:
-
-```bash
-# HM or VTM
-git clone <reference-repo-url>
-cd <reference-repo>
-mkdir build
-cd build
-cmake ..
-make -j
-```
-
-After building, set paths such as:
+Example paths:
 
 ```yaml
+# configs/codecs/h264_jm.yaml
+jm:
+  encoder_path: /path/to/JM/bin/lencod.exe
+  workdir: /path/to/JM/bin
+
 # configs/codecs/h265_hm.yaml
 hm:
   encoder_path: /path/to/HM/bin/TAppEncoderStatic
@@ -80,6 +73,16 @@ vtm:
   encoder_path: /path/to/VVCSoftware_VTM/bin/EncoderAppStatic
   cfg_path: /path/to/VVCSoftware_VTM/cfg/encoder_randomaccess_vtm.cfg
 ```
+
+Then check the YAML before running the backend:
+
+```bash
+python -m vccs check-reference --codec-config configs/codecs/h265_hm.yaml
+```
+
+Sources: JM / H.264 (https://iphome.hhi.de/suehring/tml/download/), HM / H.265
+(https://vcgit.hhi.fraunhofer.de/jct-vc/HM), VTM / H.266
+(https://vcgit.hhi.fraunhofer.de/jvet/VVCSoftware_VTM).
 
 ## Quick Start
 
@@ -118,8 +121,6 @@ python -m vccs compress-suite \
   --output outputs/q37_suite
 ```
 
-After `pip install -e .`, the shorter `vccs ...` command is also available.
-
 ## Configuration
 
 Use `configs/prepare_yuv.yaml` for input and YUV generation settings such as
@@ -139,15 +140,6 @@ Use one codec config per compression backend:
 - `configs/codecs/h266_vtm.yaml`
 - `configs/codecs/av1_ffmpeg.yaml`
 - `configs/codecs/vp9_ffmpeg.yaml`
-
-Reference software paths are configured in YAML. The package does not bundle JM,
-HM, or VTM. For `h264_jm`, set the JM executable and work directory:
-
-```yaml
-jm:
-  encoder_path: /path/to/JM/bin/lencod.exe
-  workdir: /path/to/JM/bin
-```
 
 ## Parallelism
 
