@@ -4,8 +4,11 @@ channels:
 dependencies:
   - python>=3.9
   - ffmpeg
+  - x264
+  - x265
+  - svt-av1
+  - libvpx
   - pyyaml
   - pip
   - pip:
       - -e .
-

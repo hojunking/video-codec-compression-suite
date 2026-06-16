@@ -19,9 +19,14 @@ hm:
   intra_qp_offset: null
   extra_args: []
 
+parallel:
+  # HM is usually slow and not safely accelerated by arbitrary thread flags.
+  # Prefer job-level parallelism across independent videos/scenes.
+  job_workers: 1
+  encoder_threads_supported: false
+
 logs:
   keep_native_stdout: true
   keep_native_stderr: true
   normalize_to_hevc_csv: true
   dummy_missing_fields: true
-

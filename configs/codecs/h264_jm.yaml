@@ -1,7 +1,7 @@
-codec: h265_ffmpeg
-family: h265
-runner: ffmpeg
-encoder: libx265
+codec: h264_jm
+family: h264
+runner: jm
+encoder: lencod.exe
 
 quality:
   requested_qp: 37
@@ -14,25 +14,19 @@ prediction:
   closed_gop: true
   scenecut: false
 
-x265:
-  params:
-    keyint: "{gop_size}"
-    min-keyint: "{gop_size}"
-    bframes: "{b_frames}"
-    b-adapt: 0
-    scenecut: 0
-    open-gop: 0
-
-ffmpeg:
-  preset: medium
-  threads: 0
+jm:
+  encoder_path: null
+  workdir: null
+  level_idc: 51
   extra_args: []
 
 parallel:
+  # JM is slow; prefer job-level parallelism across independent videos/scenes.
   job_workers: 1
-  encoder_threads_supported: true
+  encoder_threads_supported: false
 
 logs:
   keep_native_stdout: true
   keep_native_stderr: true
   normalize_to_hevc_csv: true
+  dummy_missing_fields: true

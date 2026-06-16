@@ -21,15 +21,19 @@ prediction:
   scenecut: false
 
 ffmpeg:
+  threads: 0
   row_mt: true
   tile_columns: 2
   quality: good
   cpu_used: 2
   extra_args: []
 
+parallel:
+  job_workers: 1
+  encoder_threads_supported: true
+
 logs:
   keep_native_stdout: true
   keep_native_stderr: true
   normalize_to_hevc_csv: true
   dummy_missing_fields: true
-

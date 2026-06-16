@@ -34,3 +34,7 @@ tools:
   ffmpeg: ffmpeg
   ffprobe: ffprobe
 
+parallel:
+  # Used when preparing multiple inputs from a manifest.
+  job_workers: 1
+  ffmpeg_threads: 0

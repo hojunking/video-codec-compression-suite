@@ -12,12 +12,19 @@ vtm:
   encoder_path: null
   cfg_path: null
   input_bit_depth: 8
+  internal_bit_depth: 8
+  output_bit_depth: 8
   input_chroma_format: 420
   extra_args: []
+
+parallel:
+  # VTM exposes implementation-specific parallel tools in cfg/args, but the
+  # safest default is job-level parallelism across independent videos/scenes.
+  job_workers: 1
+  encoder_threads_supported: false
 
 logs:
   keep_native_stdout: true
   keep_native_stderr: true
   normalize_to_hevc_csv: true
   dummy_missing_fields: true
-

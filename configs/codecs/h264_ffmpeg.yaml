@@ -17,10 +17,14 @@ prediction:
 ffmpeg:
   preset: medium
   tune: null
+  threads: 0
   extra_args: []
+
+parallel:
+  job_workers: 1
+  encoder_threads_supported: true
 
 logs:
   keep_native_stdout: true
   keep_native_stderr: true
   normalize_to_hevc_csv: true
-

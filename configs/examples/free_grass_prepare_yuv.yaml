@@ -4,7 +4,7 @@ run:
 
 input:
   type: image_sequence
-  path: "/media/knuvi/Extreme SSD/jung/3dgs-dataset/origin_dataset/free_dataset/free_dataset/grass/images"
+  path: "examples/frames"
   fps: 60
   frames: null
   start_time: null
@@ -31,4 +31,3 @@ frame_export:
 tools:
   ffmpeg: ffmpeg
   ffprobe: ffprobe
-
